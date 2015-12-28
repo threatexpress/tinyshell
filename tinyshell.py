@@ -142,8 +142,13 @@ class Console(cmd.Cmd):
         ########################################
         # RESPONSE wrapper
         ########################################
-        self.rsp_header = '<img src=data:image/gif base64 '
-        self.rsp_footer = ' />'
+        
+        #self.rsp_header = '<!-- csrf_token: '
+        #self.rsp_footer = ' />'
+
+        self.rsp_header = 'CSRF_TOKEN: '
+        self.rsp_footer = ' :TOKEN_CSRF'
+
 
         ########################################       
         # Setup Reuseable HTTP session
@@ -156,8 +161,8 @@ class Console(cmd.Cmd):
         # Initial Commands
         ########################################
         self.do_pwd()
+        self.do_cd(self.currentdir)  
         self.do_config()
-        self.prompt = "["+self.currentdir + "]# "
 
 
     def sendCommand(self, url, password, language, cmd_type, command, timeout):
@@ -442,11 +447,12 @@ class Console(cmd.Cmd):
         cmd_type = "OS"
         args = 'cd'
         if self.currentdir is "":
-            self.currentdir = self.sendCommand(self.url, self.password, self.language, cmd_type, args, self.timeout)
-            self.currentdir = self.currentdir.rstrip('\n')
+            self.currentdir = self.sendCommand(self.url, self.password, self.language, cmd_type, args, self.timeout).rstrip('\n')
         else:
-            print self.currentdir
-     
+            self.do_cd(self.currentdir) 
+        print self.currentdir
+
+
     def do_ps(self, args=None):
         """Calls tasklist on target"""
         cmd_type = "OS"
@@ -456,8 +462,13 @@ class Console(cmd.Cmd):
 
     def do_cd(self, args):
         """Change directory"""
-        self.currentdir = self.build_dir(args)
-        self.prompt = color()+"["+color(self.currentdir,"green") + "]# "         
+        if not args == "":
+            self.currentdir = self.build_dir(args)
+            self.prompt = color()+"["+color(self.currentdir,"green") + "]# "   
+        else:
+            print "a"+self.currentdir+"b"
+            self.currentdir = self.build_dir(self.currentdir)
+            self.prompt = color()+"["+color(self.currentdir,"green") + "]# " 
 
 
     def do_help(self, args):
