@@ -210,6 +210,15 @@ class Console(cmd.Cmd):
                 # Remove Beginning and trailing newlines
                 result = r.text.strip()
 
+            else:
+                # Remove Beginning and trailing newlines
+                result = r.text.strip()
+
+                msg = "[!] HTTP ERROR: " + str(r.status_code)
+                print color(msg,"red", style="bold")
+
+                return result
+
             # Locate Data in between header + footer
             r = re.compile(rsp_header + '(.+)' + rsp_footer , re.DOTALL)
             if r.search(result):
@@ -446,12 +455,8 @@ class Console(cmd.Cmd):
         """Execute sendCommand 'echo %cd%' to obtain current working directory"""
         cmd_type = "OS"
         args = 'cd'
-        if self.currentdir is "":
-            self.currentdir = self.sendCommand(self.url, self.password, self.language, cmd_type, args, self.timeout).rstrip('\n')
-        else:
-            self.do_cd(self.currentdir) 
-        print self.currentdir
-
+        self.currentdir = self.sendCommand(self.url, self.password, self.language, cmd_type, args, self.timeout)
+        self.currentdir = self.removeNewline(self.currentdir)
 
     def do_ps(self, args=None):
         """Calls tasklist on target"""
@@ -466,10 +471,9 @@ class Console(cmd.Cmd):
             self.currentdir = self.build_dir(args)
             self.prompt = color()+"["+color(self.currentdir,"green") + "]# "   
         else:
-            print "a"+self.currentdir+"b"
             self.currentdir = self.build_dir(self.currentdir)
+            self.currentdir = self.currentdir
             self.prompt = color()+"["+color(self.currentdir,"green") + "]# " 
-
 
     def do_help(self, args):
         """Get help on commands
@@ -490,6 +494,11 @@ class Console(cmd.Cmd):
 
         print result
 
+    def removeNewline(self, str):
+        """Remove newline character from string"""
+        clean = str.replace("\r\n","").replace("\n","")
+        return clean
+
     def build_dir(self,change):
         if ":\\" in change[0:3] or change.startswith("\\\\"):
             return change.lower()
@@ -503,6 +512,7 @@ class Console(cmd.Cmd):
                     continue
                 else:
                     newdir = newdir + "\\" + each
+            print newdir
             return newdir.lower()
 
     def do_ls(self, args):
