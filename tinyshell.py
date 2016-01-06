@@ -289,6 +289,14 @@ class Console(cmd.Cmd):
         print color(output,"blue",style="bold")
         print ""
 
+        # Print Warning if running in Clear Text mode
+
+        if self.mode == "clear":
+            print color("[!] WARNING: Running Clear Text Mode","red",style="bold")
+            print color("[!] This mode should only be used for troubleshooting and debugging.","red",style="bold")
+            print ""
+
+
     def do_command(self, args):
         """Issues remote command through webshell to remote system. """
         cmd_type = "OS"

