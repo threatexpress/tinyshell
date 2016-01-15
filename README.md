@@ -107,7 +107,6 @@ If an interactive command is submitted, the command will not return.  Command wi
 |ps             | List processes                                                                                                      | ps
 |pwd            | show current directory                                                                                              | pwd
 |shell          | submit command to local shell                                                                                       | shell ifconfig 
-|status         | Show status for Uploads and Downloads                                                                               | status
 |timeout        | display or set the command timeout setting in seconds                                                               | timeout 120
 |upload         | upload file to remote server.                                                                                       | upload myfile.txt c:\windows\temp\myfile.txt
 
