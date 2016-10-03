@@ -40,11 +40,11 @@ Options:
 
 TinyShell is a python command shell used to control and excute commands through HTTP requests to a webshell.  TinyShell acts as the interface to the remote webshells.  
 
-TinyShell is based on it's companion project SubShell (https://bitbucket.org/jvest/subshell)
+TinyShell is based on it's companion project SubShell (https://github.com/minisllc/subshell)
 
 ## New idea based on 
 
- - SubShell webshell framework (https://bitbucket.org/jvest/subshell)
+ - SubShell webshell framework (https://github.com/minisllc/subshell)
  - China Chopper Webshell (https://www.fireeye.com/blog/threat-research/2013/08/breaking-down-the-china-chopper-web-shell-part-i.html)
 
 ## Key Differences over SubShell
