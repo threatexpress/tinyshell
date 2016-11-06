@@ -3,6 +3,7 @@
 build/*
 !.keep
 dist/*
+*.egg-info/*
 
 ## generic files to ignore
 
