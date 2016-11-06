@@ -307,7 +307,7 @@ class Console(cmd.Cmd):
         """Download file from remote system 
         \tdownload <remote-source>
         \tdownload targetile.txt
-        \tdownload c:\\widnows\\temp\\targetfile.txt
+        \tdownload c:\\windows\\temp\\targetfile.txt
         """
         #cmd_type = "DOWNLOAD"
         #result = self.sendCommand(self.url, self.password, self.language, cmd_type, args, self.timeout)

